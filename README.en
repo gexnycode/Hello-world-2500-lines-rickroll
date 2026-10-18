@@ -1,0 +1,71 @@
+# Hello World 2500
+
+**English** | [Русский](README.ru.md)
+
+A **2500-line** Python program that does one simple thing: it prints `Hello, World!`. Just in the most complicated way possible.
+
+## Requirements
+
+- Python 3.6 or newer
+- No third-party packages needed, only the standard library (`sys`, `time`, `random`, `webbrowser`)
+
+## How to run
+
+1. Download `hello_world_2500.py`.
+2. Open a terminal in the folder with the file:
+
+   ```
+   cd path\to\folder
+   ```
+
+   On Windows, if the folder is on another drive, add `/d`: `cd /d D:\folder`.
+
+3. Run it:
+
+   ```
+   python hello_world_2500.py
+   ```
+
+Fast mode, with no pauses and no typewriter effect:
+
+```
+python hello_world_2500.py --fast
+```
+
+## What happens when you run it
+
+1. **Banner.** A big ASCII-art "Hello World" is printed, followed by `Booting HELLO WORLD ULTIMATE EDITION...`.
+2. **Boot sequence.** 100 fake "boot steps" run (`boot_step_001` ... `boot_step_100`). They are placeholder functions that print nothing, they just add bulk to the code.
+3. **RAM made of zeros and ones.** The code contains a fake "memory" list called `RAM_DUMP`. Each row is 8 bytes, which is 64 bits, written as zeros and ones. Every row except two is filled with random noise.
+4. **Finding Hello World.** The program prints the two rows at address `0x0100`, where the message is hidden.
+5. **Decoding.** The bits are converted back into bytes, and the program reads a string from address `0x0100` until it hits a zero byte. The result is `Hello, World!`, printed letter by letter like a typewriter.
+6. **Surprise.** One second later, a YouTube link opens automatically in your default browser.
+
+## What you will see in the terminal
+
+```
+Booting HELLO WORLD ULTIMATE EDITION...
+
+Scanning RAM for something interesting...
+RAM size: 13328 bytes (106624 bits)
+Rows at the hello address:
+0x0100  0100100001100101011011000110110001101111001011000010000001010111
+0x0108  0110111101110010011011000110010000100001000000000000000000000000
+
+Decoded from RAM: Hello, World!
+```
+
+## File structure
+
+| Part | What it does |
+|---|---|
+| Header and settings | Imports, the `--fast` flag, the link, the `HELLO_ADDRESS` constant |
+| `RAM_DUMP` | 1600+ rows of 64 bits each |
+| `ram_to_bytes()` | Joins the rows and turns bits into bytes |
+| `read_string()` | Reads a string from the fake memory until a zero byte |
+| `boot_step_001` ... `boot_step_100` | 100 placeholder functions |
+| `main()` | Runs everything in order |
+
+## Heads up
+
+At the end, the program **opens a link in your browser by itself**. If you don't want that, delete the `rickroll_prompt()` call at the end of `main()` or change the link in the `RICKROLL_URL` variable at the top of the file.
